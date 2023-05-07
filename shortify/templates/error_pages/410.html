@@ -1,0 +1,14 @@
+{% extends 'base.html' %} 
+{% block title %} Sorry - Your URL is Gone  {% endblock %}
+{% block content %}
+<main>
+  <section class="container my-5">
+    <div class="row">
+        <h6 class="text-center mb-5">
+            The URL you are looking for is no longer available. It may have been moved or deleted.
+        </h6>
+        <img style="width:50%" class="img-fluid mx-auto d-block" src="{{ url_for('static', filename='img/410.jpg') }}" alt="" />
+    </div>
+  </section>
+</main>
+{% endblock %}

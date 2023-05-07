@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% include 'includes/accounts/name_form.html' %}
+{% include "includes/accounts/password_form.html" %}
+{% include "includes/accounts/email_form.html" %}
+{% endblock content %}
+
+<script>
+    $(document).ready(function() {
+        // Handle name form submission
+        $('#name-form').submit(function(event) {
+            event.preventDefault(); // prevent the form from submitting normally
+
+            // send an AJAX request to the server
+            $.ajax({
+                type: 'POST',
+                url: '{{ url_for("accounts") }}', // replace with the URL of the endpoint that handles the name form submission
+                data: $(this).serialize(), // serialize the form data
+                success: function(response) {
+                    // handle the response from the server
+                    if (response.success) {
+                        // if the server indicates success, show the password and email forms
+                        $('#password-form').show();
+                        $('#email-form').show();
+                    } else {
+                        // if the server indicates failure, display an error message
+                        $('#name-form-error').text(response.error).show();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // handle the AJAX error
+                    console.log('AJAX error:', error);
+                }
+            });
+        });
+
+        // Handle password form submission
+        $("#password-form").submit(function(event) {
+            event.preventDefault(); // prevent the default form submit behavior
+
+            // get the form data
+            var formData = $(this).serialize();
+
+            // make an AJAX request to submit the form data
+            $.ajax({
+                url: $(this).attr("action"), // the form action attribute
+                method: $(this).attr("method"), // the form method attribute
+                data: formData,
+                success: function(response) {
+                    // handle the response from the server
+                    // e.g. display a success message or update the page content
+                },
+                error: function(xhr, status, error) {
+                    // handle the AJAX error
+                }
+            });
+        });
+
+        // Handle email form submission
+        $("#email-form").submit(function(event) {
+            event.preventDefault(); // prevent the default form submit behavior
+
+            // get the form data
+            var formData = $(this).serialize();
+
+            // make an AJAX request to submit the form data
+            $.ajax({
+                url: $(this).attr("action"), // the form action attribute
+                method: $(this).attr("method"), // the form method attribute
+                data: formData,
+                success: function(response) {
+                    // handle the response from the server
+                    // e.g. display a success message or update the page content
+                },
+                error: function(xhr, status, error) {
+                    // handle the AJAX error
+                }
+            });
+        });
+    });
+</script>

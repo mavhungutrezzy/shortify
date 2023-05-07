@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h6> {{ url.original }}  </h6>
+<p> {{ url.short }} </p>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{ message }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<div class="card">
+    <div class="card-body">
+      <form method="POST" novalidate>
+        {{ form.csrf_token }}
+        <div>
+          <div class="form-check form-switch mb-3">
+            {{ form.suspended(class="form-check-input py-2", id="form-suspended",) }}
+            {% if not form.suspended.data %}
+                {{ form.suspended(class="form-check-input py-2", id="form-suspended", checked=False) }}
+            {% endif %}
+            <label class="form-check-label" for="form-suspended">suspend URL</label>
+            <p>
+                {% if form.suspended.errors %}
+                    {% for error in form.suspended.errors %}
+                        <span style="color: red">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </p>
+        </div>
+        
+          <div>
+            <label>Expire Date</label>
+            {{ form.expiration_date(class="form-control form-control-sm py-2 mb-3", id="form-expiration_date",)  }}
+            <p>
+              {% if form.expiration_date.errors %}
+                {% for error in form.expiration_date.errors %}
+                  <span style="color: red">{{ error }}</span>
+                {% endfor %}
+              {% endif %}
+            </p>
+          </div>
+          <div>
+              {{ form.submit(class="btn btn-primary btn-sm", value="Update Settings") }}
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+
+{% endblock content %}

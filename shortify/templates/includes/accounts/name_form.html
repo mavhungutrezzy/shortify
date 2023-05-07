@@ -1,0 +1,33 @@
+<div class="card mb-5">
+  <div class="card-header">
+    <h6 class="card-title">Change Username</h6>
+  </div>
+  <div class="card-body">
+    <form method="POST" novalidate>
+      {{ user_form.csrf_token }}
+      <div>
+        <div>
+          {{ user_form.first_name(class="form-control form-control-sm py-2 mb-3", id="user_form-first_name", placeholder=current_user.first_name) }}
+          <p>
+            {% if user_form.first_name.errors %}
+              {% for error in user_form.first_name.errors %}
+                <span style="color: red">{{ error }}</span>
+              {% endfor %}
+            {% endif %}
+          </p>
+        </div>
+        <div>
+          {{ user_form.last_name(class="form-control form-control-sm py-2 mb-3", id="user_form-last_name", placeholder=current_user.last_name) }}
+          <p>
+            {% if user_form.last_name.errors %}
+              {% for error in user_form.last_name.errors %}
+                <span style="color: red">{{ error }}</span>
+              {% endfor %}
+            {% endif %}
+          </p>
+        </div>
+        {{ user_form.submit(class="btn btn-sm btn-primary", value="Update") }}
+      </div>
+    </form>
+  </div>
+</div>

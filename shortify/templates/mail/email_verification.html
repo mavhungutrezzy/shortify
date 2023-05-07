@@ -1,0 +1,44 @@
+{% autoescape off %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Shortify Team</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        .button {
+            display: inline-block;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            line-height: 1.6;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>Hi {{ user.email }},</p>
+        <p>Thanks for getting started with our Shortify Portal!</p>
+        <p>We need a little more information to complete your registration, including a confirmation of your email address.</p>
+        <p>Click below to confirm your email address:</p>
+        <p><a class="button" href="{{ confirmation_url }}">Confirm Email Address</a></p>
+        <p>If you have problems, please paste the above URL into your web browser.</p>
+        <p>Kind regards,<br>Shortify Team</p>
+    </div>
+</body>
+</html>
+{% endautoescape %}

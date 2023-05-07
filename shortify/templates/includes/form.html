@@ -1,0 +1,26 @@
+<form method="POST" novalidate>
+  {{ form.csrf_token }}
+  <div>
+    <div>
+      {{ form.original_link(class="form-control form-control-sm py-2 mb-3", id="form-original_link", placeholder=form.original_link.label.text) }}
+      <p>
+        {% if form.original_link.errors %}
+          {% for error in form.original_link.errors %}
+            <span style="color: red">{{ error }}</span>
+          {% endfor %}
+        {% endif %}
+      </p>
+    </div>
+    <div>
+      {{ form.custom_id(class="form-control form-control-sm py-2 mb-3", id="form-custom_id", placeholder=form.custom_id.label.text) }}
+      <p>
+        {% if form.custom_id.errors %}
+          {% for error in form.custom_id.errors %}
+            <span style="color: red">{{ error }}</span>
+          {% endfor %}
+        {% endif %}
+      </p>
+    </div>
+    {{ form.submit(class="btn btn-sm btn-primary", value="Create") }}
+  </div
+</form>

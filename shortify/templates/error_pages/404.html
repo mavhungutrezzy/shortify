@@ -1,0 +1,15 @@
+{% extends 'base.html' %} 
+{% block title %}Sorry, we can't complete your request. Please check your input and try again.{% endblock %}
+{% block content %}
+<main>
+  <section class="container my-5">
+    <div class="row">
+        <h6 class="text-center mb-5">
+          It seems that there is an issue with the data you provided. 
+          Please check your input and try again.
+        </h6>
+        <img style="width:50%" class="img-fluid mx-auto d-block" src="{{ url_for('static', filename='img/404.gif') }}" alt="" />
+    </div>
+  </section>
+</main>
+{% endblock %}

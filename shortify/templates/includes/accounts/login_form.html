@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="card-body">
+    <h1 class=""><span>Login</span></h1>
+
+    <form method="POST" novalidate>
+      {{ form.csrf_token }}
+      <div>
+        <div>
+          {{ form.email(class="form-control form-control-sm py-2 mb-3", id="form-email", placeholder=form.email.label.text) }}
+          <p>
+            {% if form.email.errors %}
+              {% for error in form.email.errors %}
+                <span style="color: red">{{ error }}</span>
+              {% endfor %}
+            {% endif %}
+          </p>
+        </div>
+        <div>
+          {{ form.password(class="form-control form-control-sm py-2 mb-3", id="form-password", placeholder=form.password.label.text) }}
+          <p>
+            {% if form.password.errors %}
+              {% for error in form.password.errors %}
+                <span style="color: red">{{ error }}</span>
+              {% endfor %}
+            {% endif %}
+          </p>
+        </div>
+        <div class="row justify-content-between">
+          <div class="col">
+            {{ form.submit(class="btn btn-sm btn-primary", value="Login") }}
+          </div>
+          <div class="col-auto">
+            <a href="{{ url_for("forgot_password")}}"><small>Forgot Password?</small></a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="card-footer bg-transparent">
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <small>Don't have an account? <a href="{{ url_for('register') }}">Register account</a></small>
+      </div>
+    </div>
+  </div>
+</div>

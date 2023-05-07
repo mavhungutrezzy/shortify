@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+    </div>
+    <div class="col-sm">
+      <p class="text-center">
+        <h5 class="text-center">
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              {{ messages[0] }}
+              {% if messages[1] %}
+                <a id="short-url" href="{{ url_for('mapper', short_url=messages[1], _external=True) }}" target="_blank">{{ url_for('mapper', short_url=messages[1], _external=True) }}</a>
+                <button type="button" class="btn"  data-clipboard-action="copy" data-clipboard-target="#short-url">
+                  <i class="bi bi-clipboard text-primary"></i>
+                </button>
+              {% endif %}
+            {% endif %}
+          {% endwith %}
+        </h5>
+      </p>
+    </div>
+    <div class="col-sm">
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+<script>
+  let clipboard = new ClipboardJS('.btn');
+  let clipboardTarget = document.getElementById('short-url');
+  let clipboardIcon = document.querySelector('i');
+
+  clipboard.on('success', function (e) {
+      clipboardIcon.classList.remove('bi-clipboard');
+      clipboardIcon.classList.add('bi-clipboard-check');
+      clipboardIcon.classList.add('text-success');
+      // set clipboardIcon size to 1.5rem
+      clipboardIcon.style.fontSize = "1.5rem";
+      clipboardTarget.classList.add('text-success');
+      e.clearSelection();
+
+      setTimeout(function () {
+          clipboardIcon.classList.remove('bi-clipboard-check');
+          clipboardIcon.classList.add('bi-clipboard');
+          clipboardTarget.classList.remove('text-success');
+          clipboardIcon.classList.remove("text-success");
+          clipboardIcon.style.fontSize = "1rem";
+      }, 5000
+  );
+  });
+</script>
